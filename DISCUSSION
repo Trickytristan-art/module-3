@@ -1,0 +1,66 @@
+using System;
+
+public class Program
+{
+    public class Vehicle
+    {
+        // Nested enum
+        public enum Type
+        {
+            Car,
+            Truck,
+            Motorcycle
+        }
+
+        // Private static field
+        private static int totalVehicles = 3;
+
+        // Nested class
+        public class Details
+        {
+            public static void ShowTotal()
+            {
+                Console.WriteLine($"Total Vehicles: {Vehicle.totalVehicles}");
+            }
+        }
+
+        // Protected nested class
+        protected class Engine
+        {
+            public void Start()
+            {
+                Console.WriteLine("Engine started.");
+            }
+        }
+
+        // Public method to demonstrate enum usage
+        public static void DisplayVehicleType(Type vehicleType)
+        {
+            Console.WriteLine($"Selected Vehicle Type: {vehicleType}");
+        }
+    }
+
+    // Subclass to access protected nested type
+    public class SportsVehicle : Vehicle
+    {
+        public static void StartEngine()
+        {
+            Engine engine = new Engine();
+            engine.Start();
+        }
+    }
+
+    // Main method
+    public static void Main()
+    {
+        // Use nested enum
+        Vehicle.Type selectedType = Vehicle.Type.Car;
+        Vehicle.DisplayVehicleType(selectedType);
+
+        // Call nested class method (accessing private member)
+        Vehicle.Details.ShowTotal();
+
+        // Access protected nested class via derived class
+        SportsVehicle.StartEngine();
+    }
+}
